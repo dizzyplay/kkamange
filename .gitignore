@@ -3,3 +3,4 @@ db_user.bat
 .idea/
 *.pyc
 venv/
+media/
