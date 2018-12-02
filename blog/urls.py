@@ -3,6 +3,6 @@ from . import views
 
 app_name='blog'
 
-urlpattenrs=[
+urlpatterns=[
     path('', views.main, name='main'),
 ]
