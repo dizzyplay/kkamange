@@ -4,4 +4,3 @@ db_user.bat
 *.pyc
 venv/
 media/
-static/

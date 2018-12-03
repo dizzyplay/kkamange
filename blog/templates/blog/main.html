@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="ko-kr">
 <head>
@@ -5,13 +6,30 @@
   <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>KKamange.site</title>
 </head>
 <body>
-<p>
-  <h1>{{ post.title }}</h1>
-
-  <img src="{{ post.photo.url }}">
-</p>
+<div class="container">
+  {% for post in qs %}
+    <div data-aos="flip-up" class="divTop">
+      <h1>{{ post.title }} <span> - {{ post.created_at }}</span></h1>
+    </div>
+    <div data-aos="fade" class="divOutside">
+      {% if post.photo %}
+        <img src="{{ post.photo.url }}" width="400">
+      {% else %}
+        no images
+      {% endif %}
+    </div>
+    <div class="divBottom">
+    {% if post.content %}
+      {{ post.content }}
+      {% else %}
+      no content
+    {% endif %}
+    </div>
+  {% endfor %}
+</div>
+<script src="{% static './bundle.js' %}"></script>
 </body>
 </html>

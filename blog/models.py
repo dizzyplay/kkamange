@@ -5,6 +5,10 @@ from django.db import models
 
 class Post(models.Model):
     title = models.CharField(max_length=150)
-    photo = models.ImageField(blank=True)
+    content = models.TextField(blank=True)
+    photo = models.ImageField()
     created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-id']
 

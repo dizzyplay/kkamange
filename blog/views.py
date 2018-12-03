@@ -6,9 +6,9 @@ from .forms import PostForm
 # Create your views here.
 
 def main(request):
-    post = Post.objects.last()
+    qs = Post.objects.all()
     return render(request, 'blog/main.html', {
-        'post': post
+        'qs': qs
     })
 
 
