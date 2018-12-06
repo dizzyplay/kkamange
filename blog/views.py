@@ -4,7 +4,7 @@ from .forms import PostForm
 
 
 def main(request):
-    qs = Post.objects.all()
+    qs = Post.objects.all()[:10]
     return render(request, 'blog/main.html', {
         'qs': qs
     })
