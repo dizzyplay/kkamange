@@ -2,10 +2,6 @@ from django.shortcuts import render, redirect
 from .models import Post
 from .forms import PostForm
 
-from PIL import Image
-
-
-# Create your views here.
 
 def main(request):
     qs = Post.objects.all()
