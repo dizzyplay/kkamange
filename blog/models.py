@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.html import mark_safe
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from PIL import Image
 from io import BytesIO
@@ -16,6 +17,9 @@ class Post(models.Model):
 
     class Meta:
         ordering = ['-id']
+
+    def image_tag(self):
+        return mark_safe('<img src="{}" width="100"/>'.format(self.photo.url))
 
     def save(self):
         im = Image.open(self.photo)
