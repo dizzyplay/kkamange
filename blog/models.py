@@ -23,9 +23,11 @@ class Post(models.Model):
         output = BytesIO()
         image_width = 1280
         x = image_width
-        y = round((im.size[1]/im.size[0]) * image_width)
-        im = im.resize((x,y))
-        orientation_key = 274
+        y = round((im.size[1]/im.size[0]) * image_width)  # 가로비율만큼 세로비율 줄임
+        im = im.resize((x, y))
+
+        # 아이폰에서 직접 사진을 찍어 올리면 가로로 눕는현상 때문에 exif 확인 후 rotate
+        orientation_key = 274  # Exif 태그
         if exif and orientation_key in exif:
             orientation = exif[orientation_key]
             rotate_values = {
@@ -38,6 +40,7 @@ class Post(models.Model):
 
         im.save(output, format="JPEG", quality=80)
         output.seek(0)
-        self.photo = InMemoryUploadedFile(output, 'ImageField', '%s.jpg' %self.photo.name.split('.')[0], 'image/jpeg',
+        # imageField 값을 새롭게 수정된 이미지 값으로 변경
+        self.photo = InMemoryUploadedFile(output, 'ImageField', '%s.jpg' % self.photo.name.split('.')[0], 'image/jpeg',
                                           sys.getsizeof(output),None)
-        super(Post,self).save()
+        super(Post, self).save()
