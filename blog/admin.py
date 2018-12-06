@@ -4,5 +4,5 @@ from .models import Post
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ['id', 'title', 'image_tag']
+    list_display = ['id', 'title', 'image_tag', 'thumbnail']
     readonly_fields = ['image_tag']

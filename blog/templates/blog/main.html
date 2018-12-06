@@ -10,7 +10,17 @@
 </head>
 <body>
 <div class="container">
+  <div data-aos="fade" class="divOutside">
+    {% for post in qs %}
+      {% if post.thumbnail %}
+        <a href="#{{ post.id }}"><img src="{{ post.thumbnail.url }}"></a>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+<div class="container">
   {% for post in qs %}
+    <div id="{{ post.id }}">
     <div data-aos="flip-up" class="divTop">
       <h1>{{ post.title }} <span> - {{ post.created_at }}</span></h1>
     </div>
@@ -22,11 +32,12 @@
       {% endif %}
     </div>
     <div class="divBottom">
-    {% if post.content %}
-      {{ post.content }}
+      {% if post.content %}
+        {{ post.content }}
       {% else %}
-      no content
-    {% endif %}
+        no content
+      {% endif %}
+    </div>
     </div>
   {% endfor %}
 </div>

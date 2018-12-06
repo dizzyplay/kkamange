@@ -7,12 +7,24 @@ import sys
 
 
 # Create your models here.
+def resize_mini_photo(img):
+    im = Image.open(img)
+    output = BytesIO()
+    width, height = im.size
+    left = round((width/3)*1)
+    right = round((height/3)*2)
+    size = (left, left, right, right)
+    im_crop = im.crop(size)
+    im_crop = im_crop.resize((64,64))
+    im_crop.save(output, format='JPEG', quality=80)
+    return output
 
 
 class Post(models.Model):
     title = models.CharField(max_length=150)
     content = models.TextField(blank=True)
-    photo = models.ImageField()
+    photo = models.ImageField(upload_to='image/%Y/%m/%d')
+    thumbnail = models.ImageField(upload_to='thumbnail/%Y/%m/%d', editable=False, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -23,6 +35,7 @@ class Post(models.Model):
 
     def save(self):
         im = Image.open(self.photo)
+        mini_output = resize_mini_photo(self.photo)
         exif = im._getexif()
         output = BytesIO()
         image_width = 1280
@@ -44,7 +57,13 @@ class Post(models.Model):
 
         im.save(output, format="JPEG", quality=80)
         output.seek(0)
+        mini_output.seek(0)
         # imageField 값을 새롭게 수정된 이미지 값으로 변경
         self.photo = InMemoryUploadedFile(output, 'ImageField', '%s.jpg' % self.photo.name.split('.')[0], 'image/jpeg',
                                           sys.getsizeof(output),None)
+        self.thumbnail = InMemoryUploadedFile(mini_output, 'ImageField',
+                                              '%s_thumbnail.jpg'% self.photo.name.split('.')[0],
+                                              'image/jpeg', sys.getsizeof(mini_output),None)
         super(Post, self).save()
+
+
