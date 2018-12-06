@@ -1,4 +1,9 @@
 from django.db import models
+from django.core.files.uploadedfile import InMemoryUploadedFile
+from PIL import Image
+from io import BytesIO
+import sys
+
 
 # Create your models here.
 
@@ -12,3 +17,27 @@ class Post(models.Model):
     class Meta:
         ordering = ['-id']
 
+    def save(self):
+        im = Image.open(self.photo)
+        exif = im._getexif()
+        output = BytesIO()
+        image_width = 1280
+        x = image_width
+        y = round((im.size[1]/im.size[0]) * image_width)
+        im = im.resize((x,y))
+        orientation_key = 274
+        if exif and orientation_key in exif:
+            orientation = exif[orientation_key]
+            rotate_values = {
+                3: Image.ROTATE_180,
+                6: Image.ROTATE_270,
+                8: Image.ROTATE_90
+            }
+            if orientation in rotate_values:
+                im = im.transpose(rotate_values[orientation])
+
+        im.save(output, format="JPEG", quality=80)
+        output.seek(0)
+        self.photo = InMemoryUploadedFile(output, 'ImageField', '%s.jpg' %self.photo.name.split('.')[0], 'image/jpeg',
+                                          sys.getsizeof(output),None)
+        super(Post,self).save()
