@@ -20,7 +20,7 @@
 </div>
 <div class="container">
   {% for post in qs %}
-    <div id="{{ post.id }}">
+    <div id="{{ post.id }}" class="container">
     <div data-aos="flip-up" class="divTop">
       <h1>{{ post.title }} <span> - {{ post.created_at }}</span></h1>
     </div>
