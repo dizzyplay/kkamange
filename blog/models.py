@@ -29,7 +29,7 @@ def resize_mini_photo(img):
 
     size = (left, top, right, bottom)
     im_crop = im.crop(size)
-    im_crop = im_crop.resize((64,64))
+    im_crop = im_crop.resize((64,64), Image.ANTIALIAS)
     im_crop.save(output, format='JPEG', quality=80)
     return output
 
