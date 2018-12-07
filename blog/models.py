@@ -20,7 +20,7 @@ def resize_mini_photo(img):
         left = 0
         top = (height - width) /2
         right = width
-        bottom = top + height
+        bottom = top + width
     else:
         left = 0
         top = 0
