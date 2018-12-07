@@ -11,9 +11,23 @@ def resize_mini_photo(img):
     im = Image.open(img)
     output = BytesIO()
     width, height = im.size
-    left = round((width/3)*1)
-    right = round((height/3)*2)
-    size = (left, left, right, right)
+    if width > height:
+        left = (width - height) /2
+        top = 0
+        right = left + height
+        bottom = height
+    elif width < height:
+        left = 0
+        top = (height - width) /2
+        right = width
+        bottom = top + height
+    else:
+        left = 0
+        top = 0
+        right = width
+        bottom = height
+
+    size = (left, top, right, bottom)
     im_crop = im.crop(size)
     im_crop = im_crop.resize((64,64))
     im_crop.save(output, format='JPEG', quality=80)
