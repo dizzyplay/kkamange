@@ -3,7 +3,7 @@ from django.utils.html import mark_safe
 from django.core.files.uploadedfile import InMemoryUploadedFile
 import sys
 
-from .image_processor import resize_mini_photo, resize_and_rotate
+from .image_processor import make_thumbnail, resize_and_rotate_img
 
 
 class Post(models.Model):
@@ -20,8 +20,8 @@ class Post(models.Model):
         return mark_safe('<img src="{}" width="100"/>'.format(self.photo.url))
 
     def save(self):
-        output = resize_and_rotate(self.photo)
-        thumbnail_output = resize_mini_photo(self.photo)
+        output = resize_and_rotate_img(self.photo)
+        thumbnail_output = make_thumbnail(self.photo)
         output.seek(0)
         thumbnail_output.seek(0)
         # imageField 값을 새롭게 수정된 이미지 값으로 변경
