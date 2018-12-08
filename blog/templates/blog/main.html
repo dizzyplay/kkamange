@@ -9,40 +9,40 @@
   <title>KKamange.site</title>
 </head>
 <body>
-<div class="container">
-  <div data-aos="fade" class="divOutside">
-    {% for post in qs %}
-      {% if post.thumbnail %}
-        <a href="#{{ post.id }}"><img src="{{ post.thumbnail.url }}"></a>
-      {% endif %}
-    {% endfor %}
-  </div>
+<div class="navbar">
+      {% for post in qs %}
+        {% if post.thumbnail %}
+          <a href="#{{ post.id }}"><img src="{{ post.thumbnail.url }}" width="40"></a>
+        {% endif %}
+      {% endfor %}
 </div>
 <div class="menuContainer">
   <div class="divTop">
-    <a href="{% url 'blog:post_new' %}"><button class="fun-btn">까망아!</button></a>
+    <a href="{% url 'blog:post_new' %}">
+      <button class="fun-btn">까망아!</button>
+    </a>
   </div>
 </div>
 <div class="container">
   {% for post in qs %}
     <div id="{{ post.id }}" class="container">
-    <div data-aos="flip-up" class="divTop">
-      <h1>{{ post.title }} <span> - {{ post.created_at }}</span></h1>
-    </div>
-    <div data-aos="fade" class="divOutside">
-      {% if post.photo %}
-        <img src="{{ post.photo.url }}" width="400">
-      {% else %}
-        no images
-      {% endif %}
-    </div>
-    <div class="divBottom">
-      {% if post.content %}
-        {{ post.content }}
-      {% else %}
-        no content
-      {% endif %}
-    </div>
+      <div data-aos="flip-up" class="divTop">
+        <h1>{{ post.title }} <span> - {{ post.created_at }}</span></h1>
+      </div>
+      <div data-aos="fade" class="divOutside">
+        {% if post.photo %}
+          <img src="{{ post.photo.url }}" width="400">
+        {% else %}
+          no images
+        {% endif %}
+      </div>
+      <div class="divBottom">
+        {% if post.content %}
+          {{ post.content }}
+        {% else %}
+          no content
+        {% endif %}
+      </div>
     </div>
   {% endfor %}
 </div>
