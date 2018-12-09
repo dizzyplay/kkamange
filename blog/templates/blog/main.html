@@ -19,9 +19,17 @@
 <div class="menuContainer">
   <div class="divTop">
     <a href="{% url 'blog:post_new' %}">
-      <button class="fun-btn">까망아!</button>
-    </a>
+      <button class="fun-btn">까망아!</button></a>
+      <br/>
   </div>
+</div>
+<div class="container">
+    {% if user.is_authenticated %}
+    {{ request.user }} 님 하
+        <a href="{% url 'user:logout' %}">로그아웃</a>
+    {% else %}
+        회원가
+    {% endif %}
 </div>
 <div class="container">
   {% for post in qs %}
