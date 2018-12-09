@@ -17,7 +17,8 @@ def rotate_img(img):
             }
             if orientation in rotate_values:
                 im = im.transpose(rotate_values[orientation])
-    except AttributeError:
+    except Exception as e:
+        print(e)
         # exif 정보가 존재하지 않음
         pass
 
