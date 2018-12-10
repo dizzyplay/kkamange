@@ -31,6 +31,9 @@ class Post(models.Model):
     def comment_count(self):
         return self.comment_set.all().count()
 
+    def short_date(self):
+        return self.created_at.strftime('%y년 %m월 %d일 %H시 %mg')
+
 
     def save(self):
         output = resize_and_rotate_img(self.photo)
