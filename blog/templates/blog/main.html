@@ -25,17 +25,18 @@
 </div>
 <div class="container">
     {% if user.is_authenticated %}
-    {{ request.user }} 님 하
+    {{ request.user }} 님 하이
         <a href="{% url 'user:logout' %}">로그아웃</a>
     {% else %}
-        회원가
+        <a href="{% url "user:sign_up" %}">Join</a><br>
+        <a href="{% url "user:login" %}">Login</a>
     {% endif %}
 </div>
 <div class="container">
   {% for post in qs %}
     <div id="{{ post.id }}" class="container">
       <div data-aos="flip-up" class="divTop">
-        <h1>{{ post.title }} <span> - {{ post.created_at }}</span></h1>
+        <h1>{{ post.title }} <span> - {{ post.user}} / {{ post.created_at }}</span></h1>
       </div>
       <div data-aos="fade" class="divOutside">
         {% if post.photo %}
