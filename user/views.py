@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model, logout
 from django.contrib.auth.views import LoginView
 from .forms import SignupForm
-
+from .serializer import UserSerializer, ProfileSerializer
 
 User = get_user_model()
 
@@ -16,7 +16,7 @@ def sign_up(request):
     else:
         form = SignupForm()
 
-    return render(request,'./user/sign_up_form.html',{
+    return render(request, './user/sign_up_form.html', {
         'form': form
     })
 
@@ -33,3 +33,10 @@ def logout_view(request):
     return redirect('/')
 
 
+def jwt_response_payload_handler(token, user=None, request=None):
+    profile = user.profile_set.get(user=user)
+    serializer = ProfileSerializer(profile)
+    return {
+        'token': token,
+        'profile':serializer.data
+    }

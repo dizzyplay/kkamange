@@ -1,5 +1,7 @@
 from django.db import models
-from  django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model
+from django.utils import timezone
+import pytz
 
 User = get_user_model()
 
@@ -10,6 +12,9 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.nickname
+
+    def username(self):
+        return self.user.username
 
 
 

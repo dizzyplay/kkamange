@@ -32,7 +32,7 @@ class Post(models.Model):
         return self.comment_set.all().count()
 
     def short_date(self):
-        return self.created_at.strftime('%y년 %m월 %d일 %H시 %mg')
+        return self.created_at.strftime('%y년 %m월 %d일 %H시 %m분')
 
 
     def save(self):
