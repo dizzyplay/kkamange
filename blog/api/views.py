@@ -2,6 +2,7 @@ from django.core.paginator import Paginator
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework import status
 
 from blog.models import Post
 
@@ -14,7 +15,7 @@ class PostAPIview(APIView):
         qs = Post.objects.all()
         paginator = Paginator(qs, 2)
         if int(page) > int(paginator.num_pages):
-            return Response(None)
+            return Response(status=status.HTTP_204_NO_CONTENT)
         qs = paginator.get_page(page)
         serializer = PostSerializer(qs, many=True)
         return Response(serializer.data)
