@@ -22,3 +22,7 @@ class Comment(models.Model):
 
     def short_date(self):
         return self.created_at.strftime("%y-%m-%d")
+
+    def children(self):
+        return Comment.objects.filter(parent=self)
+

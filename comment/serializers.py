@@ -2,10 +2,18 @@ from rest_framework import serializers
 from .models import Comment
 
 
-class CommentSerializer(serializers.ModelSerializer):
+class ChildCommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
-        fields = ['nickname','post', 'content', 'short_date']
+        fields = ['pk','nickname','post', 'content', 'short_date','parent']
+
+
+class CommentSerializer(serializers.ModelSerializer):
+    children = ChildCommentSerializer(many=True)
+
+    class Meta:
+        model = Comment
+        fields = ['pk','nickname','post', 'content', 'short_date','children']
 
 
 class CommentCreateSerializer(serializers.ModelSerializer):
