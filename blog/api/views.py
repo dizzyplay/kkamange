@@ -10,7 +10,6 @@ from user.models import Profile
 from .serializers import PostSerializer, PostCreateSerializer
 
 
-
 class PostAPIview(APIView):
 
     def get(self, request):
