@@ -6,7 +6,6 @@ import sys
 
 from .image_processor import make_thumbnail, resize_and_rotate_img
 
-
 User = get_user_model()
 
 
@@ -32,10 +31,14 @@ class Post(models.Model):
         return self.comment_set.all().count()
 
     def short_date(self):
-        return self.created_at.strftime('%y년 %m월 %d일 %H시 %m분')
+        print(self.created_at)
+        return self.created_at.strftime('%y년 %m월 %d일 %H시 %M분')
 
+    def comments(self):
+        return self.comment_set.filter(parent=None)
 
-    def save(self):
+    def save(self, *args, **kwargs):
+        print(', '.join(['{} = {}'.format(k, v) for k, v in kwargs.items()]))
         output = resize_and_rotate_img(self.photo)
         thumbnail_output = make_thumbnail(self.photo)
         output.seek(0)
