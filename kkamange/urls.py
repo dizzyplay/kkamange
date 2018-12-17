@@ -21,15 +21,18 @@ from django.conf import settings
 from rest_framework_jwt.views import obtain_jwt_token, verify_jwt_token
 
 urlpatterns = [
+    # rest api
     path('api-token-auth/', obtain_jwt_token),
     path('api-token-verify/', verify_jwt_token),
 
-    path('comment/', include('comment.urls', namespace='comment')),
+    path('blog/api/', include('blog.api.urls', namespace='blog_api')),
+    path('comment/api/', include('comment.api.urls', namespace='comment_api')),
+
+    # django urls
     path('user/', include('user.urls', namespace='user')),
     path('admin/', admin.site.urls),
     path('', include('blog.urls', namespace='blog')),
 
-    path('blog/api/', include('blog.api.urls', namespace='blog_api')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

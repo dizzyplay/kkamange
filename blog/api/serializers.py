@@ -1,5 +1,5 @@
 from blog.models import Post
-from comment.serializers import CommentSerializer
+from comment.api.serializers import CommentSerializer
 
 from rest_framework import serializers
 

@@ -1,11 +1,11 @@
 from rest_framework import serializers
-from .models import Comment
+from comment.models import Comment
 
 
 class ChildCommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
-        fields = ['pk','nickname','post', 'content', 'short_date','parent']
+        fields = ['pk', 'nickname', 'post', 'content', 'short_date', 'parent']
 
 
 class CommentSerializer(serializers.ModelSerializer):
@@ -13,12 +13,10 @@ class CommentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Comment
-        fields = ['pk','nickname','post', 'content', 'short_date','children']
+        fields = ['pk', 'nickname', 'post', 'content', 'short_date', 'children']
 
 
 class CommentCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = ['content']
-
-
