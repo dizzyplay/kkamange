@@ -21,7 +21,7 @@ class Comment(models.Model):
         return str(Profile.objects.get(id=self.user.id))
 
     def short_date(self):
-        return self.created_at.strftime("%y-%m-%d")
+        return self.created_at.strftime("%y.%m.%d %H:%M")
 
     def children(self):
         return Comment.objects.filter(parent=self)
