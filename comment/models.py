@@ -26,3 +26,6 @@ class Comment(models.Model):
     def children(self):
         return Comment.objects.filter(parent=self)
 
+    class Meta:
+        ordering=['id']
+
