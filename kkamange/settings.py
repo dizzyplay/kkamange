@@ -38,6 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.naver',
     'corsheaders',
     'rest_framework',
     'graphene_django',
@@ -45,6 +50,8 @@ INSTALLED_APPS = [
     'user',
     'comment',
 ]
+
+SITE_ID=2
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

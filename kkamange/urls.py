@@ -26,6 +26,9 @@ urlpatterns = [
     path('api-token-auth/', obtain_jwt_token),
     path('api-token-verify/', verify_jwt_token),
 
+    # all auth
+    re_path(r'^accounts/', include('allauth.urls')),
+
     path('blog/api/', include('blog.api.urls', namespace='blog_api')),
     path('comment/api/', include('comment.api.urls', namespace='comment_api')),
 
