@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework',
+    'graphene_django',
     'blog',
     'user',
     'comment',
@@ -154,4 +155,8 @@ JWT_AUTH ={
     'JWT_RESPONSE_PAYLOAD_HANDLER':
     'user.views.jwt_response_payload_handler',
     'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=9999999),
+}
+
+GRAPHENE = {
+    'SCHEMA': 'kkamange.schema.schema' # Where your Graphene schema lives
 }

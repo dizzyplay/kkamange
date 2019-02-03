@@ -14,11 +14,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.conf.urls.static import static
 from django.conf import settings
-
 from rest_framework_jwt.views import obtain_jwt_token, verify_jwt_token
+
+from graphene_django.views import GraphQLView
 
 urlpatterns = [
     # rest api
@@ -32,6 +33,9 @@ urlpatterns = [
     path('user/', include('user.urls', namespace='user')),
     path('admin/', admin.site.urls),
     path('', include('blog.urls', namespace='blog')),
+
+    # graphql
+    re_path(r'^graphql/$', GraphQLView.as_view(graphiql=True)),
 
 ]
 
