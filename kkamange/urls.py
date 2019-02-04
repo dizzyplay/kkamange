@@ -21,13 +21,22 @@ from rest_framework_jwt.views import obtain_jwt_token, verify_jwt_token
 
 from graphene_django.views import GraphQLView
 
+from .social import NaverLogin
+
 urlpatterns = [
-    # rest api
-    path('api-token-auth/', obtain_jwt_token),
-    path('api-token-verify/', verify_jwt_token),
+    # django rest framework jwt api
+    # path('api-token-auth/', obtain_jwt_token),
+    # path('api-token-verify/', verify_jwt_token),
 
     # all auth
     re_path(r'^accounts/', include('allauth.urls')),
+
+    # rest auth
+    re_path(r'^rest-auth/', include('rest_auth.urls')),
+    re_path(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
+    re_path(r'^rest-auth/naver/$', NaverLogin.as_view(), name='nv_login'),
+
+    # api
 
     path('blog/api/', include('blog.api.urls', namespace='blog_api')),
     path('comment/api/', include('comment.api.urls', namespace='comment_api')),
