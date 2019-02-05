@@ -21,7 +21,7 @@ from rest_framework_jwt.views import obtain_jwt_token, verify_jwt_token
 
 from graphene_django.views import GraphQLView
 
-from .social import NaverLogin
+from .social_login import NaverLogin
 
 urlpatterns = [
     # django rest framework jwt api
@@ -34,7 +34,6 @@ urlpatterns = [
     # rest auth
     re_path(r'^rest-auth/', include('rest_auth.urls')),
     re_path(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
-    re_path(r'^rest-auth/naver/$', NaverLogin.as_view(), name='nv_login'),
 
     # api
 

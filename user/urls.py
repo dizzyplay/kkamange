@@ -1,11 +1,9 @@
 from django.urls import path
-from . import views
+from .adapters import NaverLogin
 
 app_name = 'user'
 
 
 urlpatterns = [
-    path('signup/', views.sign_up, name='sign_up'),
-    path('login/', views.login, name='login'),
-    path('logout/', views.logout_view, name='logout')
+    path('login/naver/', NaverLogin.as_view(), name='naver_login')
 ]

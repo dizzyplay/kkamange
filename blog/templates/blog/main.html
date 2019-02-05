@@ -26,10 +26,10 @@
 <div class="container">
     {% if user.is_authenticated %}
     {{ request.user }} 님 하이
-        <a href="{% url 'user:logout' %}">로그아웃</a>
+        <a href="{% url 'account_logout' %}">로그아웃</a>
     {% else %}
-        <a href="{% url "user:sign_up" %}">Join</a><br>
-        <a href="{% url "user:login" %}">Login</a>
+        <a href="{% url "account_signup" %}">Join</a><br>
+        <a href="{% url "account_login" %}">Login</a>
     {% endif %}
 </div>
 <div class="container">
