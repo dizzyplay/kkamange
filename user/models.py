@@ -6,8 +6,8 @@ User = get_user_model()
 
 class Profile(models.Model):
     GENDER_CHOICES = (
-        ('male','Male'),
-        ('female','Female'),
+        ('M','Male'),
+        ('F','Female'),
         ('not-specified','Not Specified')
     )
     user = models.ForeignKey(User, on_delete=models.CASCADE)
