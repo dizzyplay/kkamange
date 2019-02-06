@@ -1,5 +1,5 @@
 from django.contrib.auth import get_user_model, logout
-from .serializer import UserSerializer, ProfileSerializer
+from .serializers import UserSerializer, ProfileSerializer
 
 User = get_user_model()
 
