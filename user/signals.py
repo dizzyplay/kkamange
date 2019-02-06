@@ -5,7 +5,7 @@ from user.models import Profile
 
 @receiver(user_signed_up)
 def user_signup(request, user, **kwargs):
-    soccial_account = user.socialaccount_set.all()[0]
-    gender = soccial_account.extra_data.get('gender', None)
-    Profile.objects.create(user=user, nickname=user.username, gender=gender)
-    print(soccial_account)
+    if len(user.socialaccount_set.all()) > 0:
+        soccial_account = user.socialaccount_set.all()[0]
+        gender = soccial_account.extra_data.get('gender', None)
+        Profile.objects.create(user=user, nickname=user.username, gender=gender)

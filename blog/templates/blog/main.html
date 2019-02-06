@@ -25,7 +25,8 @@
 </div>
 <div class="container">
     {% if user.is_authenticated %}
-    {{ request.user }} 님 하이
+    {{ request.user }} 님 하이<br>
+      {{ request.user.profile.nickname }}
         <a href="{% url 'account_logout' %}">로그아웃</a>
     {% else %}
         <a href="{% url "account_signup" %}">Join</a><br>

@@ -10,7 +10,7 @@ class Profile(models.Model):
         ('F','Female'),
         ('not-specified','Not Specified')
     )
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     nickname = models.CharField(max_length=20)
     gender = models.CharField(max_length=80, choices=GENDER_CHOICES, null=True)
 
