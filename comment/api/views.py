@@ -20,19 +20,12 @@ class ListComment(APIView):
 
     def post(self, request):
         user_obj = request.user
-        post_id = request.data['data']['post']
-        qs = Post.objects.get(pk=post_id)
-        c_qs = qs.comment_set.all()
-        c_qs_serializer = CommentSerializer(c_qs, many=True)
-        qd = QueryDict('', mutable=True)
-        for k, v in request.data['data'].items():
-            qd.update({k: v})
-        serializer = CommentCreateSerializer(data=qd)
+        serializer = CommentCreateSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save(
                 user=user_obj,
             )
-            return Response(c_qs_serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
 
 
