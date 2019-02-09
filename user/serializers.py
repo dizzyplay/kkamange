@@ -31,13 +31,8 @@ class UserProfileSerializer(ModelSerializer):
 
 
 class SignUpSerializer(RegisterSerializer):
-    GENDER_CHOICES = (
-        ('M', 'Male'),
-        ('F', 'Female'),
-        ('Not-specified', 'not specified'),
-    )
     nickname = serializers.CharField(required=True, write_only=True)
-    gender = serializers.ChoiceField(choices=GENDER_CHOICES)
+    gender = serializers.ChoiceField(choices=Profile.GENDER_CHOICES, default=Profile.GENDER_CHOICES[2][0])
 
     def get_cleaned_data(self):
         return {
