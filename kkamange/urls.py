@@ -26,8 +26,8 @@ from graphene_django.views import GraphQLView
 
 urlpatterns = [
     # django rest framework jwt api
-    # path('api-token-auth/', obtain_jwt_token),
-    # path('api-token-verify/', verify_jwt_token),
+    path('api-token-auth/', obtain_jwt_token),
+    path('api-token-verify/', verify_jwt_token),
 
     # all auth
     re_path(r'^accounts/', include('allauth.urls')),
